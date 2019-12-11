@@ -22,7 +22,6 @@ type TElements = {
 }
 const Column : React.FunctionComponent<Props> = ({type, items})=>{
     const {itemsArray, itemsObj}= items;
-   console.log(999, itemsArray)
     return <div css={columnClass}>
             <p css={headerText}>{type}</p>
             <ul css={ulClass}>
@@ -57,13 +56,8 @@ const ulClass :SerializedStyles = css`
 `
 
 const mapStateToProps = (state:any, OwnProps: IColumnProps) =>{
-    console.log(333, state , OwnProps.type)
     return {items :state.items[OwnProps.type]}
 }
 
-// const mapDispatchToProps = (dispatch) =>{
-//     // return {handleEdit: ()=>dispatch(addPro())}
-// }
 export default connect(mapStateToProps)(Column)
 
-// const elements = {:{id: 0 , value: ''}}

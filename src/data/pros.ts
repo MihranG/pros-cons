@@ -16,7 +16,6 @@ const initialPros : IItems = {// this normalized structure is intended for draag
 };
 
 
-
 const initialCons : IItems ={
   itemsArray: [0],
   itemsObj: {0: {value: ''}}

@@ -24,26 +24,13 @@ const DisconnectedElement = (props: Props) =>{
     const [ownValue, setOwnValue]= React.useState(value);
     const labelVal = `${proIndex+1}. ${ownValue}`;
 
-    // React.useEffect(()=>{
-    //     const timeout = setTimeout(() => {
-    //         setEditing(false);
-    //         editTodo(ownValue, value);
-    //       }, 2000);
-    
-    //       return () => clearTimeout(timeout);
-
-    // })
-    
     const changeHandler = React.useCallback((e)=>{
             e.preventDefault()
-            console.log('aaa',e.target.value )
             setOwnValue(e.target.value)
         },[proIndex])
-        console.log( 3434, editing)
     return (
         <li  onClick={()=>setEditing(true)} css={elementStyle} 
             onBlur={()=>{
-                console.log('onBlur',ownValue)
                 setEditing(false);
                 editTodo(ownValue, value);
             }}
@@ -66,7 +53,6 @@ const DisconnectedElement = (props: Props) =>{
 
 
 const mapStateToProps = (state: IState, ownProps: IownProps ) =>{
-    console.log('state', state.items[ownProps.type].itemsObj[ownProps.proIndex].value)
     return {
         value : state.items[ownProps.type].itemsObj[ownProps.proIndex].value
     }

@@ -27,7 +27,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Babel + TypeScript + React = ❤️',
+      title: 'Pros and cons',
       template: 'src/index.html',
     }),
   ],

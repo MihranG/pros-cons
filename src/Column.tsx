@@ -1,15 +1,16 @@
 import * as React from 'react';
 import {css, SerializedStyles} from '@emotion/core';
-import { connect } from 'react-redux';
-import {IPros, addPro, editPro} from './data/pros';
-
+import { connect, DispatchProp } from 'react-redux';
+import {IItems, addPro, editPro} from './data/pros';
+import {Element} from './Element';
+import { AnyAction } from 'redux';
 
 interface IColumnProps {
     type: 'PROS'|'CONS',
 }
   
 export interface OwnProps {
-    pros: IPros
+    items: IItems
 }
   
 export interface Props extends IColumnProps, OwnProps { }
@@ -19,40 +20,21 @@ type TElements = {
     arr: number[];
     normalizedData: {[id:number]:{value: string}}
 }
-const Column : React.FunctionComponent<Props> = ({type, pros})=>{
-    // const [elements, setElements] = React.useState<TElements>({arr:[], normalizedData:{}});
-    // const deleteElement = (id:number):void=>{
-    //     const {arr, normalizedData} = elements;
-    //     const index = arr.indexOf(id);
-    //     const newArr = [...arr.slice(0, index),...arr.slice(index+1,arr.length-1)];
-    //     const {[index], ...rest} = normalizedData;
-    //     setElements({arr:newArr, normalizedData: rest})
-    // }
-    const {prosArray, prosObj}= pros;
-    const handleChange  = (e: any) =>{ console.log(999,e.target, e.target.innerText,)}
-    const handleBlur  = (e: any) =>{ console.log(888,e)}
-    const handleInputChange = (e:any)=>{
-        const {value}= e.target;
-        console.log('e', value, e.target)
-    }
+const Column : React.FunctionComponent<Props> = ({type, items})=>{
+    const {itemsArray, itemsObj}= items;
+   console.log(999, itemsArray)
     return <div css={columnClass}>
             <p css={headerText}>{type}</p>
-            <ul>
-                
+            <ul css={ulClass}>
+                {itemsArray.map((itemIndex)=>{
+                    console.log()
+                    return(
+                    <Element
+                        type={type}
+                        key={itemIndex+itemsObj[itemIndex].value}
+                        proIndex={itemIndex}
+                    />)})  }
             </ul>
-            {prosArray.map((proIndex)=>{
-                return(<p
-                    data-id={proIndex}
-                    key={proIndex+prosObj[proIndex].value}
-                    contentEditable={true} 
-                    suppressContentEditableWarning={true}
-                    onInput={handleChange}
-                    onBlur={handleBlur}
-                    css={itemClass}>
-                        {`${proIndex+1}. ${prosObj[proIndex].value}`}
-                    </p>)
-            })}
-            {/* <input onChange={handleInputChange}></input> */}
         </div>
 }
 
@@ -70,17 +52,18 @@ const headerText : SerializedStyles = css`
 
 `
 
-const itemClass :SerializedStyles = css`
+const ulClass :SerializedStyles = css`
     margin: 0 10px;
 `
 
-const mapStateToProps = (state:any) =>{
-    return {pros :state.pros}
+const mapStateToProps = (state:any, OwnProps: IColumnProps) =>{
+    console.log(333, state , OwnProps.type)
+    return {items :state.items[OwnProps.type]}
 }
 
-const mapDispatchToProps = dispatch =>{
-    return {handleEdit: ()=>dispatch(addPro())}
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Column)
+// const mapDispatchToProps = (dispatch) =>{
+//     // return {handleEdit: ()=>dispatch(addPro())}
+// }
+export default connect(mapStateToProps)(Column)
 
 // const elements = {:{id: 0 , value: ''}}

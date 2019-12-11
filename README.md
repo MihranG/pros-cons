@@ -1,7 +1,3 @@
-<p align="center">Webpack + TypeScript + React = ❤️</p>
-<p align="center">
-  <img src="https://img.shields.io/github/license/saltyshiomix/webpack-typescript-react-starter.svg" alt="Package License (MIT)">
-</p>
 
 As of Babel v7, now we can handle `.ts` or `.tsx` files same as `.js` or `.jsx` files like this:
 

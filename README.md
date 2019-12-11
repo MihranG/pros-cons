@@ -44,7 +44,6 @@ $ yarn
 
 # development mode
 # it automatically opens `http://localhost:8080` in your default browser,
-# and you'll see "Webpack + TypeScript + React = ❤️"
 $ yarn dev
 
 # check types
